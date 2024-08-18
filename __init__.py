@@ -1,22 +1,12 @@
-import aqt
+from . import collection_search, url_search
 from aqt import mw
-from aqt.qt import QAction
+from aqt.qt import QMenu
 
-def search(selectedText: str) -> None:
-    selectedText = selectedText.strip()
-    searchTuple = (selectedText, ) if selectedText else None
-    aqt.dialogs.open("Browser", mw, search=searchTuple)
+menu = QMenu()
+menu.setTitle("Search Shortcuts")
+mw.form.menuTools.addAction(menu.menuAction())
+mw.form.searchShortcuts = menu
 
-def onCollectionSearch() -> None:
-    text = mw.web.selectedText()
-    search(text)
-
-def createMenuItem() -> None:
-    a = QAction(mw)
-    a.setText("Search selection in collection")
-    shortcut = mw.addonManager.getConfig(__name__)['shortcut']
-    a.setShortcut(shortcut)
-    mw.form.menuTools.addAction(a)
-    a.triggered.connect(onCollectionSearch)
-
-createMenuItem()
+menu.addAction(collection_search.createMenuItem())
+menu.addSeparator()
+menu.addActions(url_search.createMenuItems())

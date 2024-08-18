@@ -1,1 +1,10 @@
-{"shortcut": "Ctrl+B"}
+{
+    "collection_search_shortcut": "Ctrl+B",
+    "url_search_list": [
+        { 
+            "name": "Jisho",
+            "shortcut": "Ctrl+w",
+            "url": "http://jisho.org/search/"
+        }
+    ]
+}
